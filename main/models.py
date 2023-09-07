@@ -4,3 +4,5 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     amount = models.IntegerField()
     description = models.TextField()
+    category = models.TextField()
+    power = models.IntegerField()
