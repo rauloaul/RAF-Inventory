@@ -8,3 +8,11 @@ class MainTest(TestCase):
     def test_main_using_main_template(self):
         response = Client().get('/main/')
         self.assertTemplateUsed(response, 'main.html')
+
+    def test_show_main(self):
+        response = Client().get('/main/')
+        self.assertTemplateUsed(response, 'main.html')
+
+        self.assertEqual(response.context['application_name'], 'RAF Inventory')
+        self.assertEqual(response.context['name'], 'Rafif Firmansyah Aulia')
+        self.assertEqual(response.context['class'], 'PBP KKI')
