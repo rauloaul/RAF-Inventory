@@ -1,10 +1,47 @@
-<h1>RAF Inventory</h1>
+{% extends 'base.html' %}
 
-<h5>Application name:</h5>
-<p>{{ application_name }}</p>
+{% block content %}
+    <h1>RAF Inventory</h1>
 
-<h5>Name:</h5>
-<p>{{ name }}</p>
+    <h5>Application name:</h5>
+    <p>{{ application_name }}</p>
 
-<h5>Class:</h5>
-<p>{{ class }}</p>
+    <h5>Name:</h5>
+    <p>{{ name }}</p>
+
+    <h5>Class:</h5>
+    <p>{{ class }}</p>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Power</th>
+        <th>Date Added</th>
+    </tr>
+
+    {% comment %} Below is how to show the item data {% endcomment %}
+
+    {% for item in items %}
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.category}}</td>
+            <td>{{item.power}}</td>
+            <td>{{item.date_added}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br />
+
+<a href="{% url 'main:create_item' %}">
+    <button>
+        Add New Item
+    </button>
+</a>
+
+{% endblock content %}
