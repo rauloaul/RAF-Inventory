@@ -126,3 +126,256 @@ Virtual environment is a fundamental tool in Python development. It serves as an
 - MVVM, short for Model-View-ViewModel, is yet another architectural pattern. Here, the Model still stores data and logic, the View shows this data, and the ViewModel transforms data from the Model into a format that's easily presented and interacted with by the View.
 
 MVC and MVT are quite alike, differing mainly in the terminology they use and how they implement their specific frameworks. On the other hand, MVVM emphasizes a clear separation between the View and ViewModel, focusing on data binding and two-way communication between them.
+
+# Assignment 3
+
+## Answer Section:
+
+### What is the difference between POST form and GET form in Django?
+
+#### GET Form:
+- Data is appended to the URL as query parameters.
+- Data is visible in the URL.
+- Used for read-only operations and sharing URLs.
+- Limited data size due to URL length restrictions.
+
+#### POST Form:
+- Data is sent in the HTTP request body.
+- Data is not visible in the URL.
+- Used for operations that modify server-side data.
+- No inherent data size limitations.
+
+In Django, you can access form data via both POST and GET requests using the request object in your views. The choice depends on data sensitivity, the type of operation, and data size considerations.
+
+### What are the main differences between XML, JSON, and HTML in the context of data delivery?
+
+#### Purpose:
+- XML: Primarily for structured data exchange.
+- JSON: Lightweight data exchange format.
+- HTML: For creating web content.
+
+#### Syntax:
+- XML: Verbose with explicit tags.
+- JSON: Simple key-value pairs and arrays.
+- HTML: Uses specific tags for web content.
+
+#### Data Types:
+- XML: No built-in data types.
+- JSON: Supports basic data types.
+- HTML: Focuses on text, links, and media.
+
+#### Readability:
+- XML: Less human-readable.
+- JSON: Highly readable.
+- HTML: Designed for human consumption.
+
+#### Usage:
+- XML: Configuration files, data exchange.
+- JSON: Web APIs, data exchange.
+- HTML: Web content presentation.
+
+### Why is JSON often used in data exchange between modern web applications?
+
+JSON is popular in web applications because it's lightweight, human-readable, works with any programming language, and is secure. Its efficiency, native JavaScript support, and compatibility with cross-domain requests make it a preferred format for data exchange, especially in web APIs.
+
+### How I implemented the task above step-by-step
+
+ - Before creating form input, I have to implement a skeleton as a  view structure.
+
+ - First I create a folder named `templates` in the root directory. Inside that I create a file named `based.html`. Inside of it I insert:
+
+    ```
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0"
+            />
+            {% block meta %}
+            {% endblock meta %}
+        </head>
+
+        <body>
+            {% block content %}
+            {% endblock content %}
+        </body>
+    </html>
+    ```
+- In the `settings.py` on the `assignment2` folder, I enable the detection of `base.html` as a template file
+
+- In `templates` inside `main` folder, I change `main.html` with:
+    ```
+    {% extends 'base.html' %}
+
+    {% block content %}
+        <h1>RAF Inventory</h1>
+
+        <h5>Application name:</h5>
+        <p>{{ application_name }}</p>
+
+        <h5>Name:</h5>
+        <p>{{ name }}</p>
+
+        <h5>Class:</h5>
+        <p>{{ class }}</p>
+    {% endblock content %}
+    ```
+
+- Then, I start to create a Data input Form
+
+- I create a new file inside `main` named `forms.py`, which is used to create a form structure that accepts data. Fill it with:
+    ```
+    from django.forms import ModelForm
+    from main.models import Item
+
+    class ItemForm(ModelForm):
+        class Meta:
+            model = Item
+            fields = ["name", "amount", "description", "category", "power"]
+    ```
+- In `views.py` in the `main` I add some of the code with import and a new function called `create_item`.
+    ```
+    from django.http import HttpResponseRedirect
+    from django.urls import reverse
+    from main.forms import ItemForm
+    from main.models import Item
+
+    def create_item(request):
+    form = ItemForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "create_item.html", context)
+    ```
+
+- Then I change the `show_main` function inside this file with:
+    ```
+    def show_main(request):
+    items = Item.objects.all()
+
+    context = {
+        'application_name': 'RAF Inventory',
+        'name': 'Rafif Firmansyah Aulia',
+        'class': 'PBP KKI',
+        'items': items,
+    }
+
+    return render(request, 'main.html', context)
+    ```
+
+- On `urls.py` inside `main` folder, I import previously created funtion, which is `create_item`.
+
+- And I add new url path inside the `urlpatterns` to access the new importedd function.
+
+- In `templates` directory inside `main`, I created new HTML file `create_item.html`. And fill it with this:
+    ```
+    {% extends 'base.html' %} 
+
+    {% block content %}
+    <h1>Add New Item</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Add Item"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    {% endblock %}
+    ```
+
+- In `main.html` I modified new code between `{% block content %}` and `{% endblock content %}`.
+    ```
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Power</th>
+            <th>Date Added</th>
+        </tr>
+
+        {% comment %} Below is how to show the item data {% endcomment %}
+
+        {% for item in items %}
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.power}}</td>
+                <td>{{item.date_added}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br />
+
+    <a href="{% url 'main:create_item' %}">
+        <button>
+            Add New Item
+        </button>
+    </a>
+
+    {% endblock content %}
+    ```
+
+- After that I run migrate because I tried running with `py manage.py runserver` and it didn't work. So i run `py manage.py makemigrations` and after that `py manage.py makemigrations`.
+
+- in `views.py` in the `main` folder I add import `HttpResponse` and `serializers` and add a new function called `show_xml` . This what I add:
+    ```
+    from django.http import HttpResponse
+    from django.core import serializers
+
+    def show_xml(request):
+        data = Item.objects.all()
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+    ```
+- In `urls.py` inside `main`. I import the created function `show_xml`.
+- Then route the urls path in the `urlpatterns`:
+    ```
+    path('xml/', show_xml, name='show_xml'),
+    ```
+    add this code.
+
+- Do the same thing with the **JSON**.
+
+- I want to get the xml and json by ID. Firstly, I created new function `show_xml_by_id` with this code:
+    ```
+    def show_xml_by_id(request, id):
+        data = Item.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+    ```
+    After that I import the code to `urls.py` and add path to `urlpatterns`.
+
+- To implement the ** JSON by ID** I just do the same thing like the xml.
+
+### Access the five URLs in point 2 using Postman, take screenshots of the results in Postman, and add them to README.md.
+
+- **HTML**
+![Alt text](image-2.png)
+
+- **XML**
+![Alt text](image-3.png)
+
+- **JSON**
+![Alt text](image-4.png)
+
+- **XML by ID**
+![Alt text](image-5.png)
+
+- **JSON by ID**
+![Alt text](image-6.png)
