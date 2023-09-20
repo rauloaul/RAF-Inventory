@@ -51,7 +51,7 @@
 - I add URL routing in `urls.py` to connect it to the `main` view. So, in the `urls.py` inside the `assignment2` directory, I import `include` funtion from module `django.urls`
 
 - I add the URL pattern to direct it to the `main` view inside the `urlpatterns` variable.
-    ```
+    ```py
     path('main/', include('main.urls'))
     ```
 - Finally, I successfully create URL routing configuration to the `main` app.
@@ -74,7 +74,7 @@
 
 #### 5. Create a funtion in `views.py` that returns an HTML template containing my application name, my name, and my class.
 - First, I open `views.py` in the `main` application. Then on the file I add the following import statements, and add function `show_main`:
-    ```
+    ```py
     from django.shortcuts import render
 
     def show_main(request):
@@ -90,7 +90,7 @@
 
 #### 6. Create a routing in `urls.py` to map the function `views.py` to an URL.
 - I create a file `urls.py` inside `main` application directory, and fill it with this following code:
-    ```
+    ```py
     from django.urls import path
     from main.views import show_main
     
@@ -184,7 +184,7 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
 
  - First I create a folder named `templates` in the root directory. Inside that I create a file named `based.html`. Inside of it I insert:
 
-    ```
+    ```html
     {% load static %}
     <!DOCTYPE html>
     <html lang="en">
@@ -207,7 +207,7 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
 - In the `settings.py` on the `assignment2` folder, I enable the detection of `base.html` as a template file
 
 - In `templates` inside `main` folder, I change `main.html` with:
-    ```
+    ```html
     {% extends 'base.html' %}
 
     {% block content %}
@@ -227,7 +227,7 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
 - Then, I start to create a Data input Form
 
 - I create a new file inside `main` named `forms.py`, which is used to create a form structure that accepts data. Fill it with:
-    ```
+    ```py
     from django.forms import ModelForm
     from main.models import Item
 
@@ -237,7 +237,7 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
             fields = ["name", "amount", "description", "category", "power"]
     ```
 - In `views.py` in the `main` I add some of the code with import and a new function called `create_item`.
-    ```
+    ```py
     from django.http import HttpResponseRedirect
     from django.urls import reverse
     from main.forms import ItemForm
@@ -255,7 +255,7 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
     ```
 
 - Then I change the `show_main` function inside this file with:
-    ```
+    ```py
     def show_main(request):
     items = Item.objects.all()
 
@@ -274,7 +274,7 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
 - And I add new url path inside the `urlpatterns` to access the new importedd function.
 
 - In `templates` directory inside `main`, I created new HTML file `create_item.html`. And fill it with this:
-    ```
+    ```py
     {% extends 'base.html' %} 
 
     {% block content %}
@@ -297,7 +297,7 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
     ```
 
 - In `main.html` I modified new code between `{% block content %}` and `{% endblock content %}`.
-    ```
+    ```html
     <table>
         <tr>
             <th>Name</th>
@@ -336,7 +336,7 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
 - After that I run migrate because I tried running with `py manage.py runserver` and it didn't work. So i run `py manage.py makemigrations` and after that `py manage.py makemigrations`.
 
 - in `views.py` in the `main` folder I add import `HttpResponse` and `serializers` and add a new function called `show_xml` . This what I add:
-    ```
+    ```py
     from django.http import HttpResponse
     from django.core import serializers
 
@@ -346,7 +346,7 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
     ```
 - In `urls.py` inside `main`. I import the created function `show_xml`.
 - Then route the urls path in the `urlpatterns`:
-    ```
+    ```py
     path('xml/', show_xml, name='show_xml'),
     ```
     add this code.
@@ -354,7 +354,7 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
 - Do the same thing with the **JSON**.
 
 - I want to get the xml and json by ID. Firstly, I created new function `show_xml_by_id` with this code:
-    ```
+    ```py
     def show_xml_by_id(request, id):
         data = Item.objects.filter(pk=id)
         return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
