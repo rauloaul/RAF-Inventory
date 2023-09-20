@@ -19,7 +19,6 @@
         <th>Description</th>
         <th>Category</th>
         <th>Power</th>
-        <th>Date Added</th>
     </tr>
 
     {% comment %} Below is how to show the item data {% endcomment %}
@@ -27,16 +26,16 @@
     {% for item in items %}
         <tr>
             <td>{{item.name}}</td>
-            <td>{{item.price}}</td>
+            <td>{{item.amount}}</td>
             <td>{{item.description}}</td>
             <td>{{item.category}}</td>
             <td>{{item.power}}</td>
-            <td>{{item.date_added}}</td>
         </tr>
     {% endfor %}
 </table>
 
 <br />
+<p>You have inserted {{ data_count }} items in this app</p>
 
 <a href="{% url 'main:create_item' %}">
     <button>
