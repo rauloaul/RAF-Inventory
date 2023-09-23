@@ -1,7 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>RAF Inventory</h1>
+
+<style>
+    html * {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    table, td, th {
+      border: 2px solid black;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td {
+      text-align: center;
+      padding: 5px;
+      background-color: rgb(255, 199, 144);
+    }
+    th {
+      text-align: center;
+      padding: 5px;
+      background-color: rgb(126, 167, 255);
+    }
+    body {
+        background-color: rgb(255, 255, 255);
+    }
+    </style>
+
+    <h1 style="color: rgb(0, 17, 255);">RAF Inventory</h1> <hr>
 
     <h5>Application name:</h5>
     <p>{{ application_name }}</p>
@@ -19,6 +48,7 @@
         <th>Description</th>
         <th>Category</th>
         <th>Power</th>
+        <th></th>
     </tr>
 
     {% comment %} Below is how to show the item data {% endcomment %}
@@ -30,6 +60,13 @@
             <td>{{item.description}}</td>
             <td>{{item.category}}</td>
             <td>{{item.power}}</td>
+            <td>
+                <a href="delete/{{item.id}}">
+                    <button style="background-color: rgb(126, 167, 255);">
+                        Remove
+                    </button>
+                </a>
+            </td>
         </tr>
     {% endfor %}
 </table>
@@ -38,9 +75,19 @@
 <p>You have inserted {{ data_count }} items in this app</p>
 
 <a href="{% url 'main:create_item' %}">
-    <button>
+    <button style="background-color: rgb(126, 167, 255);">
         Add New Item
     </button>
 </a>
+
+<a href="{% url 'main:logout' %}">
+    <button style="background-color: rgb(126, 167, 255);">
+        Logout
+    </button>
+</a>
+
+
+
+<h5>Last login session: {{ last_login }}</h5>
 
 {% endblock content %}
