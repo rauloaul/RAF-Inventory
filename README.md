@@ -379,3 +379,175 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
 
 - **JSON by ID**
 ![Alt text](image-6.png)
+
+# Assignment 4
+
+## Answer Section:
+
+### What is `UserCreationForm`` in Django? Explain its advantages and disadvantages.
+
+In Django, UserCreationForm is a built-in form class for creating user registration forms. It simplifies the process by providing fields for common registration data like username and password, along with validation. This form integrates seamlessly with Django's authentication system, making it easy to manage user accounts in Django applications. Developers can also customize it to fit their project's specific needs.
+
+#### Advantages of using the UserCreationForm, in Django:
+
+1. `Ease of Use`: The UserCreationForm simplifies the process of creating user registration forms making it user friendly and straightforward.
+
+2. `Integration`: It seamlessly integrates with Djangos authentication system ensuring an cohesive experience for users.
+
+3. `Validation`: The UserCreationForm provides built in validation for fields ensuring data integrity and accuracy.
+
+4. `Customization`: You have the flexibility to extend and customize the UserCreationForm according to your projects needs allowing for adaptability.
+
+5. `Security`: The UserCreationForm takes care of security aspects such as password hashing ensuring that user credentials are stored securely.
+
+6. `Consistency`: By utilizing the UserCreationForm you can maintain an user registration experience throughout your project promoting familiarity and ease of use.
+
+
+#### Disadvantages of using the UserCreationForm;
+
+1. `Limited Fields`: The predefined set of fields offered by the UserCreationForm may not cover all requirements to your project. Additional customization might be necessary in cases.
+
+2. `Flexibility`: Depending on your projects needs there could be instances where the default functionality provided by the UserCreationForm might not fully meet your requirements or necessitate additional modifications.
+
+3. `Localization Effort`: If you require support in your application integrating it with the UserCreationForm might require some effort to ensure proper localization.
+
+### What is the difference between authentication and authorization in Django application? Why are both important?
+
+Authentication verifies a user's identity, while authorization determines what actions or resources they can access. Both are vital for the security and functionality of a Django application, ensuring that users have the right level of access and protection of sensitive data.
+
+### What are `cookies` in website? How does Django use `cookies` to manage user session data?
+
+Cookies are small data files sent from a web server to a user's browser and stored on their device. They're used for various purposes, including session management, remembering user preferences, tracking user behavior, etc. Django uses cookies for session management. When a user visits a Django site, it generates a unique session ID stored in a cookie. Django then stores user-specific data associated with that ID on the server. This allows Django to remember user sessions, authentication, and preferences across requests, making it easier to build interactive web applications.
+
+### Are `cookies` secure to use? Is there potential risk to be aware of?
+
+Cookies themselves are not inherently secure. Their security depends on how they are used and the precautions taken by developers. Security risks include data exposure, session hijacking, and potential for cross-site scripting (XSS) or cross-site request forgery (CSRF) attacks. Properly configured and managed cookies can be secure, but developers must implement best practices to mitigate risks.
+
+###  Explain how you implemented the checklist above step-by-step
+
+- Firstly, I created Registration form
+
+- Start with creating function `register` inside views.py with parameter `request`.
+
+- Add imports for `redirects`, `UserCreationForm`, and `messages`.
+
+- The funtion for `register` are:
+    ```py
+    def register(request):
+        form = UserCreationForm()
+
+        if request.method == "POST":
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Your account has been successfully created!')
+                return redirect('main:login')
+        context = {'form':form}
+        return render(request, 'register.html', context)
+    ```
+
+- followed by creating `register.hmtl` inside `main/templates` directory, and create the HTML file for the Register new account page.
+
+- Then we add path to the `urlpatterns`.
+
+- After that I moved on to creating the login function. Start by importinng `authenticate` and `login` into the `views.py`.
+
+- Then I add the `login_user` function to authenticate user.
+    ```py
+    def login_user(request):
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('main:show_main')
+            else:
+                messages.info(request, 'Sorry, incorrect username or password. Please try again.')
+        context = {}
+        return render(request, 'login.html', context)
+    ```
+
+- Next I create new HTML file for login in the same directory as the `register.hmtl`.
+
+- After that I create path for login_user in the `urlpatterns`
+
+- Lastly, I have to create the Logout function into the website. The steps are the same like both of the function. In the function I add:
+    ```py
+    def logout_user(request):
+        logout(request)
+        return redirect('main:login')
+    ```
+
+- Then I add button for logout in the `main.html` and create path in the `urls.py`
+
+- To restricts access for the User has to login/register into the main page, I import `login_required` into the `views.py`.
+
+- The important part, I add the `@login_required(login_url='/login')` above the `show_main` function to restricts access to the main page only to the authenticated users.
+
+- To use data from cookies I have to add last login feature.
+
+- First, start with importing `datetime` into the `views.py`, then inside the `login_user` funtion modify the code inside `if user is not None` like this:
+    ```py
+    if user is not None:
+        login(request, user)
+        response = HttpResponseRedirect(reverse("main:show_main")) 
+        response.set_cookie('last_login', str(datetime.datetime.now()))
+        return response
+    ```
+
+- In the `show_main` funtion, I modified the `context = {}` inside `show_main` with this:
+
+    ```py
+    context = {
+        'application_name': 'RAF Inventory',
+        'name': request.user.username,
+        'class': 'PBP KKI',
+        'items': items,
+        'data_count': data_count,
+        'last_login': request.COOKIES['last_login']
+        if 'last_login' in request.COOKIES.keys()
+        else "",
+    }
+    ```
+    the `if 'last_login' in request.COOKIES.keys()` i get it from pak Daya in the class session, it is to avoid the bug inside my code, because before adding this code I manage to encounter error while opening the localhost with the `last_login` error, and have to delete all the cookies in the browser.
+
+- Then modify the `logout_user` with:
+    ```py
+    def logout_user(request):
+        logout(request)
+        response = HttpResponseRedirect(reverse('main:login'))
+        response.delete_cookie('last_login')
+        return response
+    ```
+
+- To connect the Item model to User model, I have to import `User` into the `models.py`.
+
+- On the class Item i add this following code:
+    ```py
+    class Item(models.Model):
+        user = models.ForeignKey(User, on_delete=models.CASCADE)
+   ```
+
+- Then in the `create_item` on `views.py` modify the code as this:
+    ```py
+    def create_item(request):
+        form = ItemForm(request.POST or None)
+
+        if form.is_valid() and request.method == "POST":
+            item = form.save(commit=False)
+            item.user = request.user
+            item.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+    ```
+
+- Then modify the `show_main` function with:
+    ```py
+    def show_main(request):
+        items = Item.objects.filter(user=request.user)
+
+        context = {
+            'name': request.user.username,
+    ```
+
+- Then run `migrations` after changing the models.

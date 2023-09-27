@@ -5,14 +5,31 @@
 {% endblock meta %}
 
 {% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+    html * {
+        font-family: 'Poppins', sans-serif;
+    }
+    table, td, th {
+        border: 2px solid black;
+    }
+    td {
+      padding: 5px;
+      background-color: rgb(132, 181, 255);
+    }
+    body {
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+    }
+    </style>
 
 <div class = "login">
 
-    <h1 style="color:rgb(44, 107, 255); text-decoration-line: underline;">Login</h1>
+    <h1 style="color:rgb(44, 107, 255); text-decoration-line: underline;" align="center">Login</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
+        <table align="center" style="text-align: center;">
             <tr>
                 <td>Username: </td>
                 <td><input type="text" name="username" placeholder="Username" class="form-control"></td>

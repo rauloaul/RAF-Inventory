@@ -5,14 +5,30 @@
 {% endblock meta %}
 
 {% block content %}  
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+    html * {
+        font-family: 'Poppins', sans-serif;
+    }
+    table, td, th {
+      border: 2px solid black;
+    }
+    td {
+      padding: 5px;
+      background-color: rgb(255, 255, 255);
+    }
+    body {
+        background-color: rgb(255, 255, 255);
+    }
+    </style>
 
 <div class = "login">
     
-    <h1>Register</h1>  
+    <h1 align="center">Register</h1>  
 
         <form method="POST" >  
             {% csrf_token %}  
-            <table>  
+            <table align="center">  
                 {{ form.as_table }}  
                 <tr>  
                     <td></td>

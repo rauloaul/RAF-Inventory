@@ -21,7 +21,9 @@ def show_main(request):
         'class': 'PBP KKI',
         'items': items,
         'data_count': data_count,
-        'last_login': request.COOKIES['last_login'],
+        'last_login': request.COOKIES['last_login']
+        if 'last_login' in request.COOKIES.keys()
+        else "",
     }
 
     return render(request, 'main.html', context)
@@ -87,6 +89,21 @@ def logout_user(request):
     return response
 
 def delete(request, id):
-    item = Item.objects.filter(pk=id)
+    item = Item.objects.get(pk=id)
     item.delete()
+    return redirect('main:show_main')
+
+def increment(request, id):
+    item = Item.objects.get(pk=id)
+    item.amount += 1
+    item.save()
+    return redirect('main:show_main')
+
+def decrement(request, id):
+    item = Item.objects.get(pk=id)
+    if item.amount > 0:
+        item.amount += -1
+        item.save()
+    else:
+        item.amount = 0
     return redirect('main:show_main')
