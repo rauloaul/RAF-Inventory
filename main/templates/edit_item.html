@@ -1,6 +1,9 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+
+{% load static %}
 
 {% block content %}
+
 {% include 'navbar.html' %}
 
 <style>
@@ -24,37 +27,37 @@
             <div class="card-body p-5 text-center">
               <div class="mb-md-5 mt-md-4 pb-5">
                 
-                <h2 class="fw-bold mb-2">Create Item</h2>
-                <p class="text-white-50 mb-5">Please enter specific item that you want to store!</p>
+                <h2 class="fw-bold mb-2">Edit Item</h2>
+                <p class="text-white-50 mb-5">You can freely edit item in this inventory!</p>
                 
                 <form method="POST" action="#">
                     {% csrf_token %}
                         <div class="form-outline form-white mb-4">
-                            <input type="text" name="name" class="form-control form-control-lg" maxlength="255" required id="id_name"/>
+                            <input type="text" name="name" class="form-control form-control-lg" maxlength="255" required id="id_name" value="{{form.instance.name}}"/>
                             <label class="form-label" for="id_name">Name</label>
                             </div>
         
                         <div class="form-outline form-white mb-4">
-                            <input type="number" name="amount" id="id_amount" class="form-control form-control-lg" required/>
+                            <input type="number" name="amount" id="id_amount" class="form-control form-control-lg" required value="{{form.instance.amount}}"/>
                             <label class="form-label" for="id_amount">Amount</label>
                             </div>
                         
                         <div class="form-outline form-white mb-4">
-                            <textarea name="description" cols="20" rows="10" required="" id="id_description" data-gramm="false" wt-ignore-input="true" class="form-control form-control-lg"></textarea>
+                            <textarea name="description" cols="20" rows="10" required="" id="id_description" data-gramm="false" wt-ignore-input="true" class="form-control form-control-lg">{{form.instance.description}}</textarea>
                             <label class="form-label" for="id_description">Description</label>
                             </div>
                         
                         <div class="form-outline form-white mb-4">
-                            <textarea name="category" cols="40" rows="10" required="" id="id_category" data-gramm="false" wt-ignore-input="true" class="form-control form-control-lg"></textarea>
+                            <textarea name="category" cols="40" rows="10" required="" id="id_category" data-gramm="false" wt-ignore-input="true" class="form-control form-control-lg">{{form.instance.category}}</textarea>
                             <label class="form-label" for="id_category">Category</label>
                             </div>
                         
                         <div class="form-outline form-white mb-4">
-                            <input type="number" name="power" id="id_power" class="form-control form-control-lg" required/>
+                            <input type="number" name="power" id="id_power" class="form-control form-control-lg" required value="{{form.instance.power}}"/>
                             <label class="form-label" for="id_power">Power</label>
                             </div>
         
-                        <input class="btn btn-outline-light btn-lg px-5" type="submit" value="Add Item"/>
+                        <input class="btn btn-outline-light btn-lg px-5" type="submit" value="Edit Item"/>
                     </form>
               </div>
             </div>

@@ -1,6 +1,7 @@
-# Assignment 2
+## [Click Here](https://raf-inventory.adaptable.app/main/) to access RAF's Inventory App
 
-> [Click Here](https://raf-inventory.adaptable.app/main/) to access RAF's Inventory App
+<details>
+<sumary><h1>Assignment 2</h1></sumary>
 
 ## Answer Section:
 
@@ -126,8 +127,10 @@ Virtual environment is a fundamental tool in Python development. It serves as an
 - MVVM, short for Model-View-ViewModel, is yet another architectural pattern. Here, the Model still stores data and logic, the View shows this data, and the ViewModel transforms data from the Model into a format that's easily presented and interacted with by the View.
 
 MVC and MVT are quite alike, differing mainly in the terminology they use and how they implement their specific frameworks. On the other hand, MVVM emphasizes a clear separation between the View and ViewModel, focusing on data binding and two-way communication between them.
+</details>
 
-# Assignment 3
+<details>
+<sumary><h1>Assignment 3</h1></sumary>
 
 ## Answer Section:
 
@@ -380,7 +383,10 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
 - **JSON by ID**
 ![Alt text](image-6.png)
 
-# Assignment 4
+</details>
+
+<details>
+<sumary><h1>Assignment 4</h1></sumary>
 
 ## Answer Section:
 
@@ -551,3 +557,4 @@ Cookies themselves are not inherently secure. Their security depends on how they
     ```
 
 - Then run `migrations` after changing the models.
+</details>

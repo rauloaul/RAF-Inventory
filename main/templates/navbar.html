@@ -1,0 +1,35 @@
+{% block content %}
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #0000ff;
+    }
+    li {
+        float: left;
+    }
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover {
+        background-color: #27a1ff;
+    }
+    .navbar-text {
+        color: white;
+        padding: 14px 16px;
+    }
+</style>
+
+<ul>
+    <li><a href="/">Home</a></li>
+    <li class="navbar-text">Welcome to RAF Inventory</li>
+    <li style="float:right"><a class="active" href="{% url 'main:logout' %}">Logout</a></li>
+</ul>
+
+{% endblock content %}

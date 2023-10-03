@@ -107,3 +107,13 @@ def decrement(request, id):
     else:
         item.amount = 0
     return redirect('main:show_main')
+
+def edit(request, id):
+    item = Item.objects.get(pk = id)
+    form = ItemForm(request.POST or None, instance=item)
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+    
+    context = {'form': form}
+    return render(request, "edit_item.html", context)

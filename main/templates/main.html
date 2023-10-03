@@ -1,62 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% include 'navbar.html' %}
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
     html * {
         font-family: 'Poppins', sans-serif;
     }
-    table, td, th {
-      border: 2px solid black;
-    }
     table {
-      border-collapse: collapse;
-      width: 100%;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto; 
     }
-    
-    td {
-      text-align: center;
-      padding: 5px;
-      background-color: rgb(255, 199, 144);
+
+    td, th {
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(206, 221, 255);
     }
+
     th {
-      text-align: center;
-      padding: 5px;
-      background-color: rgb(126, 167, 255);
+    background-color: rgb(75, 132, 255);
     }
+
     body {
-        background-color: rgb(255, 255, 255);
-        margin: 0;
-        padding: 0;
-        text-align: center;
+    background-color: rgb(255, 255, 255);
+    margin: 0;
+    padding: 0;
+    text-align: center;
     }
+
     h1, h5, p {
-        margin: 5px 0;
-        text-align: center;
+    padding-left: 20px;
+    margin: 10px 0; /* Berikan margin atas dan bawah yang lebih besar pada elemen-elemen ini */
+    text-align: left;
     }
     </style>
+    <h1 style="color: rgb(0, 81, 255);">RAF Inventory</h1> <hr>
 
-    <h1 style="color: rgb(0, 17, 255);">RAF Inventory</h1> <hr>
-
-    <h5>Application name:</h5>
-    <p>{{ application_name }}</p>
-
-    <h5>Name:</h5>
+    <h5>Account:</h5>
     <p>{{ name }}</p>
 
-    <h5>Class:</h5>
-    <p>{{ class }}</p>
+    <h5 style="text-align: center;">Inventory</h5>
 
 <table>
-    <tr>
-        <th>Name</th>
-        <th>Amount</th>
-        <th>Add/Discard</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Power</th>
-        <th>Remove Item</th>
+    <tr style="border: 2px solid black;">
+        <th style="border: none;">Name</th>
+        <th style="border: none;">Amount</th>
+        <th style="border: none;">Description</th>
+        <th style="border: none;">Category</th>
+        <th style="border: none;">Power</th>
+        <th style="border: none;"></th>
+        <th style="border: none;"></th>
     </tr>
 
     {% comment %} Below is how to show the item data {% endcomment %}
@@ -64,20 +61,13 @@
     {% for item in items %}
         <tr>
             <td>{{item.name}}</td>
-            <td>{{item.amount}}</td>
             <td>
-                <a href="increment/{{item.id}}">
-                    <div style="display: block">
-                        <button style="background-color: rgb(126, 167, 255);">Add</button>
-                        </div>
-                </a>
-
-                <a href="decrement/{{item.id}}">
-                    <div style="display: block">
-                        <button style="background-color: rgb(126, 167, 255);">Discard</button>
-                        </div>
-                </a>
-            </td>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <a style="text-decoration: none; color: black;" href="decrement/{{item.id}}">-</a>
+                            {{ item.amount }}
+                    <a style="text-decoration: none; color: black;" href="increment/{{item.id}}">+</a>
+                </div>
+                </td>
             <td>{{item.description}}</td>
             <td>{{item.category}}</td>
             <td>{{item.power}}</td>
@@ -88,27 +78,26 @@
                     </button>
                 </a>
             </td>
+            <td>
+                <a href="{% url 'main:edit' item.pk %}">
+                    <button style="background-color: rgb(126, 167, 255);">
+                        Edit
+                    </button>
+                </a>
+            </td>
         </tr>
     {% endfor %}
 </table>
 
+
 <br />
-<p>You have inserted {{ data_count }} items in this app</p>
+<p style="text-align: center;">You have inserted {{ data_count }} items in this app</p>
 
 <a href="{% url 'main:create_item' %}">
     <button style="background-color: rgb(126, 167, 255);">
-        Add New Item
+        Create Item
     </button>
 </a>
 
-<a href="{% url 'main:logout' %}">
-    <button style="background-color: rgb(126, 167, 255);">
-        Logout
-    </button>
-</a>
-
-
-
-<h5>Last login session: {{ last_login }}</h5>
-
+<p>Last login session: {{ last_login }}</p>
 {% endblock content %}
