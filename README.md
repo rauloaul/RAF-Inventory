@@ -1,11 +1,9 @@
-## [Click Here](https://raf-inventory.adaptable.app/main/) to access RAF's Inventory App
+> [Click Here](https://raf-inventory.adaptable.app/main/) to access RAF's Inventory App
+
+## Assignment 2
 
 <details>
-<summary><h1>Assignment 2</h1></summary>
-
-## Answer Section:
-
-### How do I implement the tasks form the checklist in Assignment 2?
+<summary>How do I implement the tasks form the checklist in Assignment 2?</summary>
 
 #### 1. Create a new Django project.
 - When creating Django project, I started it with cloning the repository, so I don't have to connect local repository to the Github repository. So, I use this command:
@@ -111,14 +109,23 @@
 - Then enter the domain name, also check the HTTP Listener on PORT.
 - Finally, deploy the app to adaptable.
 
+</details>
 
-### Diagram explaining the flow of client requests to a Django web app and its response. 
+<details>
+<summary>Diagram explaining the flow of client requests to a Django web app and its response.</summary> 
 ![Alt text](image-1.png)
 
-### What is the purpose of a virtual environment? Can we create a Django web app without a virtual environment? 
+</details>
+
+<details>
+<summary>What is the purpose of a virtual environment? Can we create a Django web app without a virtual environment?</summary>
+
 Virtual environment is a fundamental tool in Python development. It serves as an isolated workspace, ensuring that each project remains independent of others and the global Python environment. This isolation is critical for managing distinct Python and package versions required for different projects. Analogously, it's akin to maintaining an organized workspace. Just as you wouldn't want your tools intermingled in disarray, virtual environments keep project directories neat and tidy. Additionally, they simplify project sharing and enhance portability. In the context of Django web applications, virtual environments are imperative. They help manage dependencies, ensuring a clean and isolated environment conducive to project development. In conclusion, virtual environments are indispensable for maintaining order, preventing conflicts, and facilitating structured Python project development, particularly for Django web applications.
 
-### What is MVC, MVT, and MVVM? Explain the differences between the three.
+</details>
+
+<details>
+<summary>What is MVC, MVT, and MVVM? Explain the differences between the three.</summary>
 
 - MVC, which stands for Model-View-Controller, is a software architecture. In this pattern, the Model takes care of storing data and managing application logic, the View presents data from the Model to users, and the Controller acts as a middleman between the Model and View.
 
@@ -130,12 +137,10 @@ MVC and MVT are quite alike, differing mainly in the terminology they use and ho
 
 </details>
 
+## Assignment 3
+
 <details>
-<summary><h1>Assignment 3</h1></summary>
-
-## Answer Section:
-
-### What is the difference between POST form and GET form in Django?
+<summary>What is the difference between POST form and GET form in Django?</summary>
 
 #### GET Form:
 - Data is appended to the URL as query parameters.
@@ -151,7 +156,10 @@ MVC and MVT are quite alike, differing mainly in the terminology they use and ho
 
 In Django, you can access form data via both POST and GET requests using the request object in your views. The choice depends on data sensitivity, the type of operation, and data size considerations.
 
-### What are the main differences between XML, JSON, and HTML in the context of data delivery?
+</details>
+
+<details>
+<summary>What are the main differences between XML, JSON, and HTML in the context of data delivery?</summary>
 
 #### Purpose:
 - XML: Primarily for structured data exchange.
@@ -178,11 +186,17 @@ In Django, you can access form data via both POST and GET requests using the req
 - JSON: Web APIs, data exchange.
 - HTML: Web content presentation.
 
-### Why is JSON often used in data exchange between modern web applications?
+</details>
+
+<details>
+<summary>Why is JSON often used in data exchange between modern web applications?</summary>
 
 JSON is popular in web applications because it's lightweight, human-readable, works with any programming language, and is secure. Its efficiency, native JavaScript support, and compatibility with cross-domain requests make it a preferred format for data exchange, especially in web APIs.
 
-### How I implemented the task above step-by-step
+</details>
+
+<details>
+<summary>How I implemented the task above step-by-step</summary>
 
  - Before creating form input, I have to implement a skeleton as a  view structure.
 
@@ -367,7 +381,10 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
 
 - To implement the ** JSON by ID** I just do the same thing like the xml.
 
-### Access the five URLs in point 2 using Postman, take screenshots of the results in Postman, and add them to README.md.
+</details>
+
+<details>
+<summary>Access the five URLs in point 2 using Postman, take screenshots of the results in Postman, and add them to README.md.</summary>
 
 - **HTML**
 ![Alt text](image-2.png)
@@ -386,16 +403,14 @@ JSON is popular in web applications because it's lightweight, human-readable, wo
 
 </details>
 
+## Assignment 4
+
 <details>
-<summary><h1>Assignment 4</h1></summary>
-
-## Answer Section:
-
-### What is `UserCreationForm`` in Django? Explain its advantages and disadvantages.
+<summary>What is `UserCreationForm`` in Django? Explain its advantages and disadvantages.</summary>
 
 In Django, UserCreationForm is a built-in form class for creating user registration forms. It simplifies the process by providing fields for common registration data like username and password, along with validation. This form integrates seamlessly with Django's authentication system, making it easy to manage user accounts in Django applications. Developers can also customize it to fit their project's specific needs.
 
-#### Advantages of using the UserCreationForm, in Django:
+### Advantages of using the UserCreationForm, in Django:
 
 1. `Ease of Use`: The UserCreationForm simplifies the process of creating user registration forms making it user friendly and straightforward.
 
@@ -409,8 +424,7 @@ In Django, UserCreationForm is a built-in form class for creating user registrat
 
 6. `Consistency`: By utilizing the UserCreationForm you can maintain an user registration experience throughout your project promoting familiarity and ease of use.
 
-
-#### Disadvantages of using the UserCreationForm;
+### Disadvantages of using the UserCreationForm:
 
 1. `Limited Fields`: The predefined set of fields offered by the UserCreationForm may not cover all requirements to your project. Additional customization might be necessary in cases.
 
@@ -418,20 +432,31 @@ In Django, UserCreationForm is a built-in form class for creating user registrat
 
 3. `Localization Effort`: If you require support in your application integrating it with the UserCreationForm might require some effort to ensure proper localization.
 
-### What is the difference between authentication and authorization in Django application? Why are both important?
+</details>
+
+<details>
+<summary>What is the difference between authentication and authorization in Django application? Why are both important?</summary>
 
 Authentication verifies a user's identity, while authorization determines what actions or resources they can access. Both are vital for the security and functionality of a Django application, ensuring that users have the right level of access and protection of sensitive data.
 
-### What are `cookies` in website? How does Django use `cookies` to manage user session data?
+</details>
+
+<details>
+<summary>What are `cookies` in website? How does Django use `cookies` to manage user session data?</summary>
 
 Cookies are small data files sent from a web server to a user's browser and stored on their device. They're used for various purposes, including session management, remembering user preferences, tracking user behavior, etc. Django uses cookies for session management. When a user visits a Django site, it generates a unique session ID stored in a cookie. Django then stores user-specific data associated with that ID on the server. This allows Django to remember user sessions, authentication, and preferences across requests, making it easier to build interactive web applications.
 
-### Are `cookies` secure to use? Is there potential risk to be aware of?
+</details>
+
+<details>
+<summary>Are `cookies` secure to use? Is there potential risk to be aware of?</summary>
 
 Cookies themselves are not inherently secure. Their security depends on how they are used and the precautions taken by developers. Security risks include data exposure, session hijacking, and potential for cross-site scripting (XSS) or cross-site request forgery (CSRF) attacks. Properly configured and managed cookies can be secure, but developers must implement best practices to mitigate risks.
 
-###  Explain how you implemented the checklist above step-by-step
+</details>
 
+<details>
+<summary>Explain how you implemented the checklist above step-by-step</summary>
 - Firstly, I created Registration form
 
 - Start with creating function `register` inside views.py with parameter `request`.
@@ -558,4 +583,590 @@ Cookies themselves are not inherently secure. Their security depends on how they
     ```
 
 - Then run `migrations` after changing the models.
+
 </details>
+
+## Assignment 5
+
+<details>
+<summary>Explain the purpose of some CSS element selector and when to use it.</summary>
+
+1. `Universal Selector (*)`: Targets all elements on a page, sparingly used for common styles or resets.
+
+2. `Type or Tag Selector`: Targets elements by their HTML tag name `(e.g., <h1>, <p>)`, used for styling all instances of a specific tag.
+
+3. `Class Selector (.classname)`: Targets elements with a specific class attribute value, versatile for styling multiple elements with the same class.
+
+4. `ID Selector (#idname)`: Targets a unique element with a specific id attribute value, suitable for styling a single, unique element.
+
+5. `Attribute Selector ([attribute=value])`: Targets elements with a specific attribute and value, used for styling elements with a particular attribute value.
+
+6. `Pseudo-class Selector (:pseudo-class)`: Targets elements in specific states or conditions, used for adding interactivity or styling based on user actions or element states.
+
+</details>
+
+<details>
+<summary>Explain some of the HTML5 tags that you know.</summary>
+
+1. `<nav>`: Defines a navigation menu or links to other pages. It's used for grouping navigation-related content, such as menus and links.
+
+2. `<section>`: Represents a thematic grouping of content, such as chapters, articles, or subsections. It helps in organizing content and providing structural clarity.
+
+3. `<details>` and `<summary>`: `<details>` is used to create a disclosure widget for additional information, and `<summary>` provides a label or summary for the details that can be expanded or collapsed.
+
+</details>
+
+<details>
+<summary>What are the differences between margin and padding?</summary>
+
+- Margin affects the space outside the element, influencing its position relative to other elements on the page.
+
+- Padding affects the space inside the element, influencing the space between the content and the element's border.
+
+</details>
+
+<details>
+<summary>What are the differences between the CSS framework Tailwind and Bootstrap? When should we use Bootstrap rather than Tailwind, and vice versa?</summary>
+
+**Tailwind CSS and Bootstrap differ in their:**
+
+1. Approach:
+
+    - Tailwind: Utility-first, fine-grained control.
+    - Bootstrap: Component-based, pre-designed components.
+
+2. Customization:
+
+    - Tailwind: Highly customizable.
+    - Bootstrap: Limited customization.
+
+3. File Size:
+
+    - Tailwind: Smaller due to selective CSS.
+    - Bootstrap: Larger, includes all component styles.
+
+3. Learning Curve:
+
+    - Tailwind: Steeper.
+    - Bootstrap: Easier, beginner-friendly.
+
+**Tailwind CSS:**
+- Need fine-grained styling control.
+- Prioritize customization.
+- Comfortable with utility-first approach.
+
+**Bootstrap:**
+- Rapid prototyping.
+- Prefer ready-made components.
+- Simplicity and ease of use are key.
+
+</details>
+
+<details>
+<summary>Explain how you implemented the checklist above step-by-step (not just following the tutorial).</summary>
+
+- First I Add Bootstrap to the Django project by adding `<meta name="viewport">` inside `templates/base.html` file.
+
+- Then I add Bootstrap and JavaScript by inserting both links into `templates/base.html`:
+    ```html
+    <head>
+        {% block meta %}
+            ...
+        {% endblock meta %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+J4jsl5c9zdLKaUk5Ae5f5b1bw6AUn5f5v8FZJoMxm6f5cH1" crossorigin="anonymous"></script>
+    </head>
+    ```
+- Then I start by adding navbar into the application, I create it's own `navbar.html` in `main/templates` then I add this code:
+    ```html
+    {% block content %}
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #0000ff;
+        }
+        li {
+            float: left;
+        }
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        li a:hover {
+            background-color: #27a1ff;
+        }
+        .navbar-text {
+            color: white;
+            padding: 14px 16px;
+        }
+    </style>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li class="navbar-text">Welcome to RAF Inventory</li>
+        <li style="float:right"><a class="active" href="{% url 'main:logout' %}">Logout</a></li>
+    </ul>
+    {% endblock content %}
+    ```
+
+- Then if I want to show navbar in certain pages I just use `{% include 'navbar.html' %}` at the very top of the html file after block content.
+
+- Then I create Edit Function into the application. Inside `views.py` add this following code:
+    ```py
+    def edit_item(request, id):
+        item = Item.objects.get(pk = id)
+        form = ItemForm(request.POST or None, instance=item)
+        if form.is_valid() and request.method == "POST":
+            form.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+        context = {'form': form}
+        return render(request, "edit_product.html", context)
+    ```
+
+- Later on the html file of `edit_item.html` we modify the layout using bootstrap.
+
+- Add import `edit_item` into `urls.py` and add path into `urlpatterns`
+
+- After that, add buttons into `main.html` for `edit_item` pages.
+
+### Modifying templates using bootstrap
+
+- for `main.html`:
+
+    ```html
+    {% extends 'base.html' %}
+
+    {% block content %}
+    {% include 'navbar.html' %}
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+        html * {
+            font-family: 'Poppins', sans-serif;
+        }
+        table {
+        border-collapse: collapse;
+        width: 80%;
+        margin: 20px auto; 
+        }
+
+        td, th {
+        border: 2px solid black;
+        padding: 10px;
+        text-align: center;
+        background-color: rgb(206, 221, 255);
+        }
+
+        th {
+        background-color: rgb(75, 132, 255);
+        }
+
+        body {
+        background-color: rgb(255, 255, 255);
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        }
+
+        h1, h5, p {
+        padding-left: 20px;
+        margin: 10px 0; /* Berikan margin atas dan bawah yang lebih besar pada elemen-elemen ini */
+        text-align: left;
+        }
+        </style>
+        <h1 style="color: rgb(0, 81, 255);">RAF Inventory</h1> <hr>
+
+        <h5>Account:</h5>
+        <p>{{ name }}</p>
+
+        <h5 style="text-align: center;">Inventory</h5>
+
+    <table>
+        <tr style="border: 2px solid black;">
+            <th style="border: none;">Name</th>
+            <th style="border: none;">Amount</th>
+            <th style="border: none;">Description</th>
+            <th style="border: none;">Category</th>
+            <th style="border: none;">Power</th>
+            <th style="border: none;"></th>
+            <th style="border: none;"></th>
+        </tr>
+
+        {% comment %} Below is how to show the item data {% endcomment %}
+
+        {% for item in items %}
+            <tr>
+                <td>{{item.name}}</td>
+                <td>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <a style="text-decoration: none; color: black;" href="decrement/{{item.id}}">-</a>
+                                {{ item.amount }}
+                        <a style="text-decoration: none; color: black;" href="increment/{{item.id}}">+</a>
+                    </div>
+                    </td>
+                <td>{{item.description}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.power}}</td>
+                <td>
+                    <a href="delete/{{item.id}}">
+                        <button style="background-color: rgb(126, 167, 255);">
+                            Remove
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'main:edit' item.pk %}">
+                        <button style="background-color: rgb(126, 167, 255);">
+                            Edit
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+    <br />
+    <p style="text-align: center;">You have inserted {{ data_count }} items in this app</p>
+
+    <a href="{% url 'main:create_item' %}">
+        <button style="background-color: rgb(126, 167, 255);">
+            Create Item
+        </button>
+    </a>
+
+    <p>Last login session: {{ last_login }}</p>
+    {% endblock content %}
+    ```
+
+- for `login.html`:
+
+    ```html
+    {% extends 'base.html' %}
+
+    {% block meta %}
+        <title>Login</title>
+    {% endblock meta %}
+
+    {% block content %}
+    <style>
+    .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #5f5dff;
+        
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #0000ff, #ff0000);
+        
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #0000ff, #ff0000);
+        }
+        
+        @media (min-width: 768px) {
+        .gradient-form {
+        height: 100vh !important;
+        }
+        }
+        @media (min-width: 769px) {
+        .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+        }
+        }
+    </style>
+
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+                <div class="row g-0">
+                <div class="col-lg-6">
+                    <div class="card-body p-md-5 mx-md-4">
+    
+                    <div class="text-center">
+                        <h4 class="mt-1 mb-5 pb-1">RAF Item Storage</h4>
+                    </div>
+    
+                    <form method="POST" action="">
+                        {% csrf_token %}
+    
+                        <div class="form-outline mb-4">
+                            <input type="text" name="username" placeholder="Username" class="form-control">
+                        <label class="form-label" for="form2Example11">Username</label>
+                        </div>
+    
+                        <div class="form-outline mb-4">
+                            <input type="password" name="password" placeholder="Password" class="form-control"></td>
+                        <label class="form-label" for="form2Example22">Password</label>
+                        </div>
+    
+                        <div class="text-center pt-1 mb-5 pb-1">
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" value="Login">Log
+                            in</button>
+                        </div>
+    
+                        <div class="d-flex align-items-center justify-content-center pb-4">
+                        <p class="mb-0 me-2">Don't have an account?</p>
+                        <a class="btn btn-outline-danger" href="{% url 'main:register' %}">Register</a>
+                        </div>
+    
+                    </form>
+    
+                    </div>
+                </div>
+                <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                    <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                    <h4 class="mb-3">Welcome to RAF Item Storage</h4>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    {% endblock content %}
+    ```
+
+- for `register.html`:
+
+    ```html
+    {% extends 'base.html' %}
+
+    {% block meta %}
+        <title>Register</title>
+    {% endblock meta %}
+
+    {% block content %}  
+    <style>
+    .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #5f5dff;
+        
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #0000ff, #ff0000);
+        
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #0000ff, #ff0000);
+        }
+        
+        @media (min-width: 768px) {
+        .gradient-form {
+        height: 100vh !important;
+        }
+        }
+        @media (min-width: 769px) {
+        .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+        }
+        }
+    </style>
+
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+                <div class="row g-0">
+                <div class="col-lg-6">
+                    <div class="card-body p-md-5 mx-md-4">
+    
+                    <div class="text-center">
+                        <h4 class="mt-1 mb-5 pb-1">Register Account</h4>
+                    </div>
+    
+                    <form method="POST" action="">
+                        {% csrf_token %}
+    
+                        <div class="form-outline mb-4">
+                            <input type="text" name="username" maxlength="150" class="form-control" autocapitalize="none" autocomplete="username" autofocus required id="id_username">
+                        <label class="form-label" for="id_username">Username</label>
+                        </div>
+    
+                        <div class="form-outline mb-4">
+                            <input type="password" name="password1" class="form-control" autocomplete="new-password" required id="id_password1" aria-autocomplete="list"></td>
+                        <label class="form-label" for="id_password1">Password</label>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="password" name="password2" class="form-control" autocomplete="new-password" required id="id_password2"></td>
+                        <label class="form-label" for="id_password2">Password Confirmation</label>
+                        </div>
+    
+    
+                        <div class="text-center pt-1 mb-5 pb-1">
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" value="Register">Register</button>
+                        </div>
+    
+    
+                    </form>
+    
+                    </div>
+                </div>
+                <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                    <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                    <h4 class="mb-3">RAF Inventory</h4>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    {% endblock content %}
+    ```
+
+- for `create_item`:
+
+    ```html
+    {% extends 'base.html' %} 
+
+    {% block content %}
+    {% include 'navbar.html' %}
+
+    <style>
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #14bdff;
+        
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 255));
+        
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 255))
+        }
+    </style>
+
+    <section class="vh-120 gradient-custom">
+        <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+                <div class="mb-md-5 mt-md-4 pb-5">
+                    
+                    <h2 class="fw-bold mb-2">Create Item</h2>
+                    <p class="text-white-50 mb-5">Please enter specific item that you want to store!</p>
+                    
+                    <form method="POST" action="#">
+                        {% csrf_token %}
+                            <div class="form-outline form-white mb-4">
+                                <input type="text" name="name" class="form-control form-control-lg" maxlength="255" required id="id_name"/>
+                                <label class="form-label" for="id_name">Name</label>
+                                </div>
+            
+                            <div class="form-outline form-white mb-4">
+                                <input type="number" name="amount" id="id_amount" class="form-control form-control-lg" required/>
+                                <label class="form-label" for="id_amount">Amount</label>
+                                </div>
+                            
+                            <div class="form-outline form-white mb-4">
+                                <textarea name="description" cols="20" rows="10" required="" id="id_description" data-gramm="false" wt-ignore-input="true" class="form-control form-control-lg"></textarea>
+                                <label class="form-label" for="id_description">Description</label>
+                                </div>
+                            
+                            <div class="form-outline form-white mb-4">
+                                <textarea name="category" cols="40" rows="10" required="" id="id_category" data-gramm="false" wt-ignore-input="true" class="form-control form-control-lg"></textarea>
+                                <label class="form-label" for="id_category">Category</label>
+                                </div>
+                            
+                            <div class="form-outline form-white mb-4">
+                                <input type="number" name="power" id="id_power" class="form-control form-control-lg" required/>
+                                <label class="form-label" for="id_power">Power</label>
+                                </div>
+            
+                            <input class="btn btn-outline-light btn-lg px-5" type="submit" value="Add Item"/>
+                        </form>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    {% endblock %}
+    ```
+
+- for `edit_item,htmnl`:
+
+    ```html
+    {% extends 'base.html' %}
+
+    {% load static %}
+
+    {% block content %}
+
+    {% include 'navbar.html' %}
+
+    <style>
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #14bdff;
+        
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 255));
+        
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 255))
+        }
+    </style>
+
+    <section class="vh-120 gradient-custom">
+        <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+                <div class="mb-md-5 mt-md-4 pb-5">
+                    
+                    <h2 class="fw-bold mb-2">Edit Item</h2>
+                    <p class="text-white-50 mb-5">You can freely edit item in this inventory!</p>
+                    
+                    <form method="POST" action="#">
+                        {% csrf_token %}
+                            <div class="form-outline form-white mb-4">
+                                <input type="text" name="name" class="form-control form-control-lg" maxlength="255" required id="id_name" value="{{form.instance.name}}"/>
+                                <label class="form-label" for="id_name">Name</label>
+                                </div>
+            
+                            <div class="form-outline form-white mb-4">
+                                <input type="number" name="amount" id="id_amount" class="form-control form-control-lg" required value="{{form.instance.amount}}"/>
+                                <label class="form-label" for="id_amount">Amount</label>
+                                </div>
+                            
+                            <div class="form-outline form-white mb-4">
+                                <textarea name="description" cols="20" rows="10" required="" id="id_description" data-gramm="false" wt-ignore-input="true" class="form-control form-control-lg">{{form.instance.description}}</textarea>
+                                <label class="form-label" for="id_description">Description</label>
+                                </div>
+                            
+                            <div class="form-outline form-white mb-4">
+                                <textarea name="category" cols="40" rows="10" required="" id="id_category" data-gramm="false" wt-ignore-input="true" class="form-control form-control-lg">{{form.instance.category}}</textarea>
+                                <label class="form-label" for="id_category">Category</label>
+                                </div>
+                            
+                            <div class="form-outline form-white mb-4">
+                                <input type="number" name="power" id="id_power" class="form-control form-control-lg" required value="{{form.instance.power}}"/>
+                                <label class="form-label" for="id_power">Power</label>
+                                </div>
+            
+                            <input class="btn btn-outline-light btn-lg px-5" type="submit" value="Edit Item"/>
+                        </form>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    {% endblock %}
+    ```
