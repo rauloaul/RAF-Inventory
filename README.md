@@ -1170,3 +1170,39 @@ Cookies themselves are not inherently secure. Their security depends on how they
     </section>
     {% endblock %}
     ```
+</details>
+
+## Assignment 6
+
+<details>
+<summary>Explain the difference between asynchronous programming and synchronous programming.</summary>
+
+
+- Synchronous programming executes tasks in a predictable, sequential order, one after the other, potentially causing delays and blocking the program. Asynchronous programming, on the other hand, enables tasks to run concurrently and independently, using mechanisms like callbacks or promises to coordinate their execution. It is ideal for non-blocking, parallel tasks, making it suitable for operations such as I/O and network requests, ensuring program responsiveness.
+</details>
+
+<details>
+<summary>In the implementation of JavaScript and AJAX, there is an implemented paradigm called the event-driven programming paradigm. Explain what this paradigm means and give one example of its implementation in this assignment.</summary>
+
+- Event-driven programming is a paradigm where a program's flow is determined by events, such as user interactions. In JavaScript and AJAX, it's used extensively for creating interactive web applications. For example, when a user clicks a button on a webpage, an event handler function is executed in response to that specific event, making the application dynamic and responsive.
+</details>
+
+<details>
+<summary>Explain the implementation of asynchronous programming in AJAX.
+</summary>
+
+- In AJAX, asynchronous programming allows web applications to send and receive data without blocking the user interface. It's implemented by making asynchronous requests using techniques like the fetch API. These requests run in the background, and when a response is ready, callbacks or promises handle the data. This ensures that the application remains responsive, and error handling is also a part of the process.
+</details>
+
+<details>
+<summary>In this semester, the implementation of AJAX is done using the Fetch API rather than the jQuery library. Compare the two technologies and write down your opinion which technology is better to use.
+</summary>
+
+- In my opinion, for modern web development, the Fetch API is typically the better choice due to its lightweight nature, native browser support, and the use of promises. This approach promotes cleaner, more modern coding practices. However, if I need to support older browsers or require the extensive community and plugin support that jQuery offers, it can still be a relevant choice, especially for legacy systems or projects with a heavy reliance on jQuery-dependent plugins. My decision should be based on my project's specific requirements and my team's expertise.
+</details>
+
+<details>
+<summary>Explain how you implemented the checklist above step-by-step (not just following the tutorial).
+</summary>
+
+</details>

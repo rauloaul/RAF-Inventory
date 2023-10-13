@@ -22,7 +22,7 @@
     }
 
     th {
-    background-color: rgb(75, 132, 255);
+    background-color: #0000ff;
     }
 
     body {
@@ -38,66 +38,133 @@
     text-align: left;
     }
     </style>
-    <h1 style="color: rgb(0, 81, 255);">RAF Inventory</h1> <hr>
 
-    <h5>Account:</h5>
-    <p>{{ name }}</p>
+<h1 style="color: #0000ff;">RAF Inventory</h1> <hr>
 
-    <h5 style="text-align: center;">Inventory</h5>
+<h5>Account:</h5>
+<p>{{ name }}</p>
 
-<table>
-    <tr style="border: 2px solid black;">
-        <th style="border: none;">Name</th>
-        <th style="border: none;">Amount</th>
-        <th style="border: none;">Description</th>
-        <th style="border: none;">Category</th>
-        <th style="border: none;">Power</th>
-        <th style="border: none;"></th>
-        <th style="border: none;"></th>
-    </tr>
+<h3 style="text-align: center; color: #0000ff;">Inventory</h3>
 
-    {% comment %} Below is how to show the item data {% endcomment %}
-
-    {% for item in items %}
-        <tr>
-            <td>{{item.name}}</td>
-            <td>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <a style="text-decoration: none; color: black;" href="decrement/{{item.id}}">-</a>
-                            {{ item.amount }}
-                    <a style="text-decoration: none; color: black;" href="increment/{{item.id}}">+</a>
-                </div>
-                </td>
-            <td>{{item.description}}</td>
-            <td>{{item.category}}</td>
-            <td>{{item.power}}</td>
-            <td>
-                <a href="delete/{{item.id}}">
-                    <button style="background-color: rgb(126, 167, 255);">
-                        Remove
-                    </button>
-                </a>
-            </td>
-            <td>
-                <a href="{% url 'main:edit' item.pk %}">
-                    <button style="background-color: rgb(126, 167, 255);">
-                        Edit
-                    </button>
-                </a>
-            </td>
-        </tr>
-    {% endfor %}
-</table>
-
+<table id="product_table"></table>
+<p style="text-align: center; padding-right: 20px;">Items in Inventory: {{ items.count }}</p>
 
 <br />
-<p style="text-align: center;">You have inserted {{ data_count }} items in this app</p>
 
-<a href="{% url 'main:create_item' %}">
-    <button style="background-color: rgb(126, 167, 255);">
-        Create Item
-    </button>
-</a>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="col-form-label">Amount:</label>
+                        <input type="number" class="form-control" id="amount" name="amount"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="col-form-label">Category:</label>
+                        <textarea class="form-control" id="category" name="category"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="power" class="col-form-label">Power:</label>
+                        <input type="number" class="form-control" id="power" name="power"></input>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product</button>
 
+<p style="text-align: right; padding-right: 10px ;">RAF Inventory</p>
 <p>Last login session: {{ last_login }}</p>
+
+<script>
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+    }
+
+    async function refreshProducts() {
+        const productTable = document.getElementById("product_table");
+        productTable.innerHTML = "";
+
+        const products = await getProducts();
+        let htmlString = "<div class='row'>";  // Start a new row
+
+        products.forEach((item, index) => {
+            if (index % 3 === 0 && index !== 0) {
+                htmlString += "</div><div class='row'>";  // Close previous row and start a new row for every 3 cards
+            }
+
+            htmlString += `
+                <div class="col-md-4">
+                    <div class="card-item">
+                        <div class="card mx-auto p-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h2 class="card-title">${item.fields.name}</h2>
+                                <p class="card-text">Amount: ${item.fields.amount}</p>
+                                <p class="card-text">${item.fields.description}</p>
+                                <p class="card-text">Category: ${item.fields.category}</p>
+                                <p class="card-text">Price: ${item.fields.power}</p>
+                                <a style="justify-content: baseline;" href='edit/${item.pk}' class="btn btn-outline-warning" onclick="editItem(${item.pk})">Edit</a>
+                                <button style="justify-content: baseline;" class="btn btn-outline-danger" onclick="deleteProduct(${item.pk})">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+        });
+
+        htmlString += "</div>";  // Close the last row
+        productTable.innerHTML = htmlString;
+    }
+
+    function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
+
+    function editProduct(productId) {
+        fetch(`{% url 'main:edit' 0 %}${productId}/`, {
+        method: "POST",
+        body: new FormData(document.querySelector('#form'))
+    }).then(refreshProducts)
+
+    document.getElementById("form").reset()
+    return false
+    }
+
+    function deleteProduct(productId) {
+        fetch(`{% url 'main:delete' 0 %}`.replace("0", productId), {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
+
+    refreshProducts()
+    document.getElementById("button_add").onclick = addProduct
+</script>
 {% endblock content %}

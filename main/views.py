@@ -4,11 +4,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseNotFound, HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.core import serializers
 from main.forms import ItemForm
 from main.models import Item
+from django.views.decorators.csrf import csrf_exempt
+
 
 @login_required(login_url='/login')
 def show_main(request):
@@ -117,3 +119,23 @@ def edit(request, id):
     
     context = {'form': form}
     return render(request, "edit_item.html", context)
+
+def get_product_json(request):
+    product_item = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', product_item))
+
+def add_product_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        category = request.POST.get("category")
+        power = request.POST.get("power")
+        user = request.user
+
+        new_product = Item(name=name, amount=amount, description=description, category=category, power=power, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
