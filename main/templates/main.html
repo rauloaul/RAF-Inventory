@@ -47,9 +47,10 @@
 <h3 style="text-align: center; color: #0000ff;">Inventory</h3>
 
 <table id="product_table"></table>
-<p style="text-align: center; padding-right: 20px;">Items in Inventory: {{ items.count }}</p>
 
 <br />
+
+<p style="text-align: center; padding-right: 20px;">Items in Inventory: {{ data_count }}</p>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -132,6 +133,7 @@
 
         htmlString += "</div>";  // Close the last row
         productTable.innerHTML = htmlString;
+        document.getElementById("item_count").innerHTML = `Items in Inventory: ${ items.length }`
     }
 
     function addProduct() {
