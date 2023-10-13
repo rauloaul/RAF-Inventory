@@ -1205,4 +1205,28 @@ Cookies themselves are not inherently secure. Their security depends on how they
 <summary>Explain how you implemented the checklist above step-by-step (not just following the tutorial).
 </summary>
 
+- First, create new `get_product_json` function in `views.py`.
+    ```py
+    def get_product_json(request):
+        product_item = Product.objects.all()
+        return HttpResponse(serializers.serialize('json', product_item))
+    ```
+
+- After that, create a new `add_product_ajax`, before that we import `csrf_exempt` in `views.py`, then add this code:
+    ```py
+    @csrf_exempt
+    def add_product_ajax(request):
+        if request.method == 'POST':
+            name = request.POST.get("name")
+            price = request.POST.get("price")
+            description = request.POST.get("description")
+            user = request.user
+
+            new_product = Product(name=name, price=price, description=description, user=user)
+            new_product.save()
+
+            return HttpResponse(b"CREATED", status=201)
+
+        return HttpResponseNotFound()
+    ```
 </details>
