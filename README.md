@@ -1229,4 +1229,127 @@ Cookies themselves are not inherently secure. Their security depends on how they
 
         return HttpResponseNotFound()
     ```
+
+- then add both path in `urls.py` into `urlpatterns` list.
+
+- then replace this table in the `main.html`:
+    ```html
+    <table id="product_table"></table>
+    ```
+
+- add `<script>` tag block and add this for every feature:
+    ```html
+    <script>
+        async function getProducts() {
+            return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+        }
+
+        async function refreshProducts() {
+            const productTable = document.getElementById("product_table");
+            productTable.innerHTML = "";
+
+            const products = await getProducts();
+            let htmlString = "<div class='row'>";  // Start a new row
+
+            products.forEach((item, index) => {
+                if (index % 3 === 0 && index !== 0) {
+                    htmlString += "</div><div class='row'>";  // Close previous row and start a new row for every 3 cards
+                }
+
+                htmlString += `
+                    <div class="col-md-4">
+                        <div class="card-item">
+                            <div class="card mx-auto p-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title">${item.fields.name}</h2>
+                                    <p class="card-text">Amount: ${item.fields.amount}</p>
+                                    <p class="card-text">${item.fields.description}</p>
+                                    <p class="card-text">Category: ${item.fields.category}</p>
+                                    <p class="card-text">Price: ${item.fields.power}</p>
+                                    <a style="justify-content: baseline;" href='edit/${item.pk}' class="btn btn-outline-warning" onclick="editItem(${item.pk})">Edit</a>
+                                    <button style="justify-content: baseline;" class="btn btn-outline-danger" onclick="deleteProduct(${item.pk})">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+
+            htmlString += "</div>";  // Close the last row
+            productTable.innerHTML = htmlString;
+            document.getElementById("item_count").innerHTML = `Items in Inventory: ${ items.length }`
+        }
+
+        function addProduct() {
+            fetch("{% url 'main:add_product_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshProducts)
+
+            document.getElementById("form").reset()
+            return false
+        }
+
+        function editProduct(productId) {
+            fetch(`{% url 'main:edit' 0 %}${productId}/`, {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+        }
+
+        function deleteProduct(productId) {
+            fetch(`{% url 'main:delete' 0 %}`.replace("0", productId), {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshProducts)
+
+            document.getElementById("form").reset()
+            return false
+        }
+
+        refreshProducts()
+        document.getElementById("button_add").onclick = addProduct
+    </script>
+    ```
+
+- add a form modal to the code in `main.html`:
+    ```html
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product by AJAX</button>
+    ```
+
+- then deploy the app to PaaS.
 </details>
