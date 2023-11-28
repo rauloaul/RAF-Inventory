@@ -82,6 +82,10 @@
                         <label for="power" class="col-form-label">Power:</label>
                         <input type="number" class="form-control" id="power" name="power"></input>
                     </div>
+                    <div class="mb-3">
+                        <label for="rating" class="col-form-label">Rating:</label>
+                        <input type="number" class="form-control" id="rating" name="rating"></input>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -112,23 +116,97 @@
             if (index % 3 === 0 && index !== 0) {
                 htmlString += "</div><div class='row'>";  // Close previous row and start a new row for every 3 cards
             }
-
-            htmlString += `
-                <div class="col-md-4">
-                    <div class="card-item">
-                        <div class="card mx-auto p-3" style="width: 18rem;">
-                            <div class="card-body">
-                                <h2 class="card-title">${item.fields.name}</h2>
-                                <p class="card-text">Amount: ${item.fields.amount}</p>
-                                <p class="card-text">${item.fields.description}</p>
-                                <p class="card-text">Category: ${item.fields.category}</p>
-                                <p class="card-text">Price: ${item.fields.power}</p>
-                                <a style="justify-content: baseline;" href='edit/${item.pk}' class="btn btn-outline-warning" onclick="editItem(${item.pk})">Edit</a>
-                                <button style="justify-content: baseline;" class="btn btn-outline-danger" onclick="deleteProduct(${item.pk})">Delete</button>
+            
+            if (item.fields.rating == 4) {
+                htmlString += `
+                    <div class="col-md-4">
+                        <div class="card-item" style="background-color: rgb(0,0,255);">
+                            <div class="card mx-auto p-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title">${item.fields.name}</h2>
+                                    <p class="card-text">Amount: ${item.fields.amount}</p>
+                                    <p class="card-text">${item.fields.description}</p>
+                                    <p class="card-text">Category: ${item.fields.category}</p>
+                                    <p class="card-text">Price: ${item.fields.power}</p>
+                                    <a style="justify-content: baseline;" href='edit/${item.pk}' class="btn btn-outline-warning" onclick="editItem(${item.pk})">Edit</a>
+                                    <button style="justify-content: baseline;" class="btn btn-outline-danger" onclick="deleteProduct(${item.pk})">Delete</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>`;
+                    </div>`;
+            } else if (item.fields.rating == 3) {
+                htmlString += `
+                    <div class="col-md-4">
+                        <div class="card-item" style="background-color: rgb(0,255,0);">
+                            <div class="card mx-auto p-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title">${item.fields.name}</h2>
+                                    <p class="card-text">Amount: ${item.fields.amount}</p>
+                                    <p class="card-text">${item.fields.description}</p>
+                                    <p class="card-text">Category: ${item.fields.category}</p>
+                                    <p class="card-text">Price: ${item.fields.power}</p>
+                                    <a style="justify-content: baseline;" href='edit/${item.pk}' class="btn btn-outline-warning" onclick="editItem(${item.pk})">Edit</a>
+                                    <button style="justify-content: baseline;" class="btn btn-outline-danger" onclick="deleteProduct(${item.pk})">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+
+            else if (item.fields.rating == 2) {
+                htmlString += `
+                    <div class="col-md-4">
+                        <div class="card-item" style="background-color: rgb(255,255,0);">
+                            <div class="card mx-auto p-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title">${item.fields.name}</h2>
+                                    <p class="card-text">Amount: ${item.fields.amount}</p>
+                                    <p class="card-text">${item.fields.description}</p>
+                                    <p class="card-text">Category: ${item.fields.category}</p>
+                                    <p class="card-text">Price: ${item.fields.power}</p>
+                                    <a style="justify-content: baseline;" href='edit/${item.pk}' class="btn btn-outline-warning" onclick="editItem(${item.pk})">Edit</a>
+                                    <button style="justify-content: baseline;" class="btn btn-outline-danger" onclick="deleteProduct(${item.pk})">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+            else if (item.fields.rating == 1) {
+                htmlString += `
+                    <div class="col-md-4">
+                        <div class="card-item" style="background-color: rgb(255,0,0);">
+                            <div class="card mx-auto p-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title">${item.fields.name}</h2>
+                                    <p class="card-text">Amount: ${item.fields.amount}</p>
+                                    <p class="card-text">${item.fields.description}</p>
+                                    <p class="card-text">Category: ${item.fields.category}</p>
+                                    <p class="card-text">Price: ${item.fields.power}</p>
+                                    <a style="justify-content: baseline;" href='edit/${item.pk}' class="btn btn-outline-warning" onclick="editItem(${item.pk})">Edit</a>
+                                    <button style="justify-content: baseline;" class="btn btn-outline-danger" onclick="deleteProduct(${item.pk})">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+            else if (item.fields.rating == 0) {
+                htmlString += `
+                    <div class="col-md-4">
+                        <div class="card-item" style="background-color: rgb(255,0,255);">
+                            <div class="card mx-auto p-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title">${item.fields.name}</h2>
+                                    <p class="card-text">Amount: ${item.fields.amount}</p>
+                                    <p class="card-text">${item.fields.description}</p>
+                                    <p class="card-text">Category: ${item.fields.category}</p>
+                                    <p class="card-text">Price: ${item.fields.power}</p>
+                                    <a style="justify-content: baseline;" href='edit/${item.pk}' class="btn btn-outline-warning" onclick="editItem(${item.pk})">Edit</a>
+                                    <button style="justify-content: baseline;" class="btn btn-outline-danger" onclick="deleteProduct(${item.pk})">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
         });
 
         htmlString += "</div>";  // Close the last row

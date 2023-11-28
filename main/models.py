@@ -8,3 +8,4 @@ class Item(models.Model):
     description = models.TextField()
     category = models.TextField()
     power = models.IntegerField()
+    rating = models.IntegerField(default=0)
